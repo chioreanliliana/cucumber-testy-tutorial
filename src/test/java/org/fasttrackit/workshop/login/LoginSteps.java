@@ -22,12 +22,12 @@ public class LoginSteps extends TestBaseNative {
     LoginPage loginPage;
 
     @Given("^I access the login page$")
-    public void I_access_the_login_page() throws Throwable {
+    public void I_access_the_login_page()  {
         driver.get("https://dl.dropboxusercontent.com/u/16174618/FastTrackIT/app-demo/login.html");
     }
 
     @Given("^I insert valid credentials$")
-    public void I_insert_valid_credentials() throws Throwable {
+    public void I_insert_valid_credentials()  {
       WebElement email = driver.findElement(By.id("email"));
       email.sendKeys("eu@fast.com");
 
@@ -37,14 +37,14 @@ public class LoginSteps extends TestBaseNative {
          }
 
     @When("^I click login button$")
-    public void I_click_login_button() throws Throwable {
+    public void I_click_login_button()  {
         WebElement button = driver.findElement(By.id("loginButton"));
         button.click();
 
            }
 
     @Then("^I check if user was logged in$")
-    public void I_check_if_user_was_logged_in() throws Throwable {
+    public void I_check_if_user_was_logged_in() {
         WebElement logout = driver.findElement(By.linkText("Logout"));
         boolean successLoggedin = logout.isDisplayed();
         assertThat("Could not find logout button", successLoggedin, is(true));
@@ -52,7 +52,7 @@ public class LoginSteps extends TestBaseNative {
     }
 
     @Given("^I insert invalid credentials$")
-    public void I_insert_invalid_credentials() throws Throwable {
+    public void I_insert_invalid_credentials()  {
         WebElement email = driver.findElement(By.id("email"));
         email.sendKeys("aa@fast.com");
 
