@@ -11,3 +11,9 @@ Feature: Login
     And I insert invalid credentials
     When I click login button
     Then I expect invalid credential message
+
+  Scenario: Login with no password
+    Given I access the login page
+    When I enter "aa@fast.com"/"" credentials
+    And I click login button
+    Then I expect "Please enter your password!" error message
