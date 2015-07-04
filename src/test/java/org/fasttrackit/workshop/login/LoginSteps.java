@@ -19,7 +19,7 @@ import static org.junit.Assert.assertThat;
 public class LoginSteps extends TestBaseNative {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginSteps.class);
 
-    LoginPage loginPage;
+    LoginPage loginPage = new LoginPage();
 
     @Given("^I access the login page$")
     public void I_access_the_login_page()  {
@@ -38,10 +38,10 @@ public class LoginSteps extends TestBaseNative {
 
     @When("^I click login button$")
     public void I_click_login_button()  {
-        WebElement button = driver.findElement(By.id("loginButton"));
-        button.click();
+        loginPage.clickOnLoginButton(driver);
+    }
 
-           }
+
 
     @Then("^I check if user was logged in$")
     public void I_check_if_user_was_logged_in() {
@@ -65,7 +65,7 @@ public class LoginSteps extends TestBaseNative {
 
     @Then("^I expect invalid credential message$")
     public void I_expect_invalid_credential_message() {
-        errorMessageShouldBePresent("Invalid user or password");
+        errorMessageShouldBePresent("Invalid user or password!");
 
     }
 
@@ -87,5 +87,13 @@ public class LoginSteps extends TestBaseNative {
     @Then("^I expect \"([^\"]*)\" error message$")
     public void I_expect_error_message(String expectedMessage) {
         errorMessageShouldBePresent(expectedMessage);
+    }
+
+    @Given("^I successfully login$")
+    public void I_successfully_login() {
+        I_access_the_login_page();
+        I_insert_valid_credentials();
+        I_click_login_button();
+        I_check_if_user_was_logged_in();
     }
 }

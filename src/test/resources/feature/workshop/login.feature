@@ -1,3 +1,4 @@
+@screen
 Feature: Login
 
   Scenario: Login successfully
@@ -28,7 +29,7 @@ Feature: Login
     Given I access the login page
     When I enter ""/"" credentials
     And I click login button
-    Then I expect "Please enter your email and password!" error message
+    Then I expect "Please enter your email!" error message
 
   Scenario Outline: Failed at login
     Given I access the login page
@@ -41,3 +42,6 @@ Feature: Login
       |             | onlypass | Please enter your email!    |
       | aa@fast.com | aa       | Invalid user or password!   |
       |             |          | Please enter your email!    |
+
+    Scenario: Logout success
+    Given I successfully login
