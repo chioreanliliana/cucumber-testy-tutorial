@@ -15,6 +15,8 @@ import static org.junit.Assert.assertThat;
 
 public class LoginSteps extends TestBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginSteps.class);
+    public static final String VALID_EMAIL = "eu@fast.com";
+    public static final String VALID_PASSWORD = "eu.pass";
 
     private LoginView loginPage = new LoginView();
 
@@ -25,7 +27,7 @@ public class LoginSteps extends TestBase {
 
     @Given("^I insert valid credentials$")
     public void I_insert_valid_credentials() {
-        loginPage.enterCredentials("eu@fast.com", "eu.pass");
+        loginPage.enterCredentials(VALID_EMAIL, VALID_PASSWORD);
     }
 
     @When("^I click login button$")
