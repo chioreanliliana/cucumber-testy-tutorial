@@ -35,7 +35,9 @@ public class LoginPage {
 
     public void enterCredentials(String emailValue, String passValue) {
         email.sendKeys(emailValue);
+        System.out.println("enter email: " + emailValue);
         password.sendKeys(passValue);
+        System.out.println("enter pass: " + passValue);
     }
 
     public void errorMessageShouldBePresent(String expectedMessage) {
