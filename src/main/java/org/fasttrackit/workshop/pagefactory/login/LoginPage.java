@@ -14,12 +14,11 @@ public class LoginPage {
     @FindBy(how = How.ID, using = "email")
     private WebElement emailEl;
 
-    public void enterEmail(String email) {
-        emailEl.sendKeys(email);
-    }
+    @FindBy(how = How.ID, using = "loginButton")
+    private WebElement loginButton;
 
-    public void clickOnLoginButton(WebDriver driver) {
-        WebElement button = driver.findElement(By.id("loginButton"));
-        button.click();
+
+    public void clickOnLoginButton() {
+        loginButton.click();
     }
 }
