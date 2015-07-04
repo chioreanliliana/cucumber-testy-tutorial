@@ -22,7 +22,7 @@ public class LoginSteps extends TestBaseNative {
 
     LoginPage loginPage;
 
-    public LoginSteps(){
+    public LoginSteps() {
         initPage();
     }
 
@@ -31,25 +31,19 @@ public class LoginSteps extends TestBaseNative {
     }
 
     @Given("^I access the login page$")
-    public void I_access_the_login_page()  {
-        driver.get("https://dl.dropboxusercontent.com/u/16174618/FastTrackIT/app-demo/login.html");
+    public void I_access_the_login_page() {
+        driver.get("file:///F:/Installers/installers/backup/app-demo/login.html");
     }
 
     @Given("^I insert valid credentials$")
-    public void I_insert_valid_credentials()  {
-      WebElement email = driver.findElement(By.id("email"));
-      email.sendKeys("eu@fast.com");
-
-      WebElement password = driver.findElement(By.id("password"));
-      password.sendKeys("eu.pass");
-
-         }
-
-    @When("^I click login button$")
-    public void I_click_login_button()  {
-        loginPage.clickOnLoginButton();
+    public void I_insert_valid_credentials() {
+        loginPage.enterCredentials("eu@fast.com", "eu.pass");
     }
 
+    @When("^I click login button$")
+    public void I_click_login_button() {
+        loginPage.clickOnLoginButton();
+    }
 
 
     @Then("^I check if user was logged in$")
@@ -61,12 +55,8 @@ public class LoginSteps extends TestBaseNative {
     }
 
     @Given("^I insert invalid credentials$")
-    public void I_insert_invalid_credentials()  {
-        WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys("aa@fast.com");
-
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys("aa.pass");
+    public void I_insert_invalid_credentials() {
+        loginPage.enterCredentials("aa@fast.com", "aa.pass");
 
         I_enter_credentials("aa@fast.com", "aa.pass");
 
@@ -74,28 +64,19 @@ public class LoginSteps extends TestBaseNative {
 
     @Then("^I expect invalid credential message$")
     public void I_expect_invalid_credential_message() {
-        errorMessageShouldBePresent("Invalid user or password!");
+        loginPage.errorMessageShouldBePresent("Invalid user or password!");
 
-    }
-
-    private void errorMessageShouldBePresent(String expectedMessage) {
-        WebElement error = driver.findElement(By.className("error-msg"));
-        assertThat(error.getText(), is(expectedMessage));
     }
 
 
     @When("^I enter \"([^\"]*)\"/\"([^\"]*)\" credentials$")
-    public void I_enter_credentials(String emailValue, String passValue)  {
-        WebElement email = driver.findElement(By.id("email"));
-        email.sendKeys(emailValue);
-
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys(passValue);
+    public void I_enter_credentials(String emailValue, String passValue) {
+        loginPage.enterCredentials(emailValue, passValue);
     }
 
     @Then("^I expect \"([^\"]*)\" error message$")
     public void I_expect_error_message(String expectedMessage) {
-        errorMessageShouldBePresent(expectedMessage);
+        loginPage.errorMessageShouldBePresent(expectedMessage);
     }
 
     @Given("^I successfully login$")
