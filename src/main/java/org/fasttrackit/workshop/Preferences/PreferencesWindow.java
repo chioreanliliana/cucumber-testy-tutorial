@@ -52,6 +52,7 @@ public class PreferencesWindow {
 
     public void isMessageDisplayed(String expectedMessage) {
         assertThat(statusMessageEl.getHtmlText(), is(expectedMessage));
+
     }
 
     public void close() {
