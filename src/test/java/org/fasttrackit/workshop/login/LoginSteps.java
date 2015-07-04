@@ -3,6 +3,7 @@ package org.fasttrackit.workshop.login;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import mainMenuView.MainMenuView;
 import org.fasttrackit.util.TestBase;
 import org.fasttrackit.util.TestBaseNative;
 import org.openqa.selenium.By;
@@ -15,8 +16,8 @@ import static org.junit.Assert.assertThat;
 
 public class LoginSteps extends TestBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginSteps.class);
-    public static final String VALID_EMAIL = "eu@fast.com";
-    public static final String VALID_PASSWORD = "eu.pass";
+    public static String VALID_EMAIL = "eu@fast.com";
+    public static String VALID_PASSWORD = "eu.pass";
 
     private LoginView loginPage = new LoginView();
 
@@ -37,6 +38,7 @@ public class LoginSteps extends TestBase {
 
     @Then("^I check if user was logged in$")
     public void I_check_if_user_was_logged_in() {
+        //MainMenuView.logout.assertExists();
         WebElement logout = driver.findElement(By.linkText("Logout"));
         boolean successLoggedin = logout.isDisplayed();
         assertThat("Could not find logout button", successLoggedin, is(true));

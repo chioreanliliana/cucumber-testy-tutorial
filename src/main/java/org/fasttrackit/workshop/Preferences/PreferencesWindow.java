@@ -5,6 +5,10 @@ import com.sdl.selenium.web.WebLocatorAbstractBuilder;
 import com.sdl.selenium.web.button.Button;
 import com.sdl.selenium.web.form.TextField;
 import com.sdl.selenium.web.utils.Utils;
+import org.openqa.selenium.WebDriver;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 
 public class PreferencesWindow {
@@ -14,8 +18,9 @@ public class PreferencesWindow {
     private TextField currentPassword = new TextField().setLabel("Current Password");
     private TextField newPassword = new TextField().setLabel("New Password");
     private TextField confirmPass = new TextField().setLabel("Repeat Password");
-    private Button saveButton = new Button().setText("Save").setContainer(window);
-    private Button closeButton = new Button().setText("Close").setContainer(window);
+    private Button saveButton = new Button(window).setText("Save");
+    private Button closeButton = new Button(window).setText("Close");
+    private WebLocator statusMessageEl = new WebLocator(window).setClasses("status-msg");
 
     public static void main(String[] args) {
         PreferencesWindow preferencesWindow = new PreferencesWindow();
@@ -39,5 +44,18 @@ public class PreferencesWindow {
 
     public void typeConfirmNewPassword(String newPass) {
         confirmPass.setValue(newPass);
+    }
+
+    public void save() {
+        saveButton.assertClick();
+    }
+
+    public void isMessageDisplayed(String expectedMessage) {
+        assertThat(statusMessageEl.getHtmlText(), is(expectedMessage));
+    }
+
+    public void close() {
+        closeButton.assertClick();
+        Utils.sleep(1000); //because of fading window
     }
 }
